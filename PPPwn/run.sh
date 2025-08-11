@@ -43,46 +43,34 @@ XFNW=""
 fi
 STA2="stage2_1100.bin"
 HDIR="vx_sta/"
-if [ $UGH = true ] && [[ $FIRMWAREVERSION == "9.00" ]] || [[ $FIRMWAREVERSION == "9.03" ]] || [[ $FIRMWAREVERSION == "9.60" ]] || [[ $FIRMWAREVERSION == "10.00" ]] || [[ $FIRMWAREVERSION == "10.01" ]] || [[ $FIRMWAREVERSION == "10.50" ]] || [[ $FIRMWAREVERSION == "10.70" ]] || [[ $FIRMWAREVERSION == "10.71" ]] || [[ $FIRMWAREVERSION == "11.00" ]] ; then
-HDIR="gh_sta/"
-if [[ $FIRMWAREVERSION == "9.00" ]] ; then
-STA2="stage2_900.bin"
-elif [[ $FIRMWAREVERSION == "9.03" ]] ; then
-STA2="stage2_903.bin"
-elif [[ $FIRMWAREVERSION == "9.60" ]] ; then
-STA2="stage2_950.bin"
-elif [[ $FIRMWAREVERSION == "10.00" ]] || [[ $FIRMWAREVERSION == "10.01" ]] ; then
-STA2="stage2_1000.bin"
-elif [[ $FIRMWAREVERSION == "10.50" ]] || [[ $FIRMWAREVERSION == "10.70" ]] || [[ $FIRMWAREVERSION == "10.71" ]] ; then
-STA2="stage2_1050.bin"
-elif [[ $FIRMWAREVERSION == "11.00" ]] ; then
-STA2="stage2_1100.bin"
-fi
+if [ $UGH = true ]; then
+    HDIR="gh_sta/"
+    STA2="stage2_$FIRMWAREVERSION.bin"
 else
-UGH=false
-if [[ $FIRMWAREVERSION == "7.00" ]] || [[ $FIRMWAREVERSION == "7.01" ]] || [[ $FIRMWAREVERSION == "7.02" ]] ; then
-STA2="stage2_700.bin"
-elif [[ $FIRMWAREVERSION == "7.50" ]] || [[ $FIRMWAREVERSION == "7.51" ]] || [[ $FIRMWAREVERSION == "7.55" ]] ; then
-STA2="stage2_750.bin"
-elif [[ $FIRMWAREVERSION == "8.00" ]] || [[ $FIRMWAREVERSION == "8.01" ]] || [[ $FIRMWAREVERSION == "8.03" ]] ; then
-STA2="stage2_800.bin"
-elif [[ $FIRMWAREVERSION == "8.50" ]] || [[ $FIRMWAREVERSION == "8.52" ]] ; then
-STA2="stage2_8.50.bin"
-elif [[ $FIRMWAREVERSION == "9.00" ]] ; then
-STA2="stage2_900.bin"
-elif [[ $FIRMWAREVERSION == "9.03" ]] || [[ $FIRMWAREVERSION == "9.04" ]] ; then
-STA2="stage2_903.bin"
-elif [[ $FIRMWAREVERSION == "9.50" ]] || [[ $FIRMWAREVERSION == "9.51" ]] || [[ $FIRMWAREVERSION == "9.60" ]] ; then
-STA2="stage2_950.bin"
-elif [[ $FIRMWAREVERSION == "10.00" ]] || [[ $FIRMWAREVERSION == "10.01" ]] ; then
-STA2="stage2_1000.bin"
-elif [[ $FIRMWAREVERSION == "10.50" ]] || [[ $FIRMWAREVERSION == "10.70" ]] || [[ $FIRMWAREVERSION == "10.71" ]] ; then
-STA2="stage2_1050.bin"
-elif [[ $FIRMWAREVERSION == "11.00" ]] ; then
-STA2="stage2_1100.bin"
+    UGH=false
+    if [[ $FIRMWAREVERSION == "7.00" ]] || [[ $FIRMWAREVERSION == "7.01" ]] || [[ $FIRMWAREVERSION == "7.02" ]] ; then
+    STA2="stage2_700.bin"
+    elif [[ $FIRMWAREVERSION == "7.50" ]] || [[ $FIRMWAREVERSION == "7.51" ]] || [[ $FIRMWAREVERSION == "7.55" ]] ; then
+    STA2="stage2_750.bin"
+    elif [[ $FIRMWAREVERSION == "8.00" ]] || [[ $FIRMWAREVERSION == "8.01" ]] || [[ $FIRMWAREVERSION == "8.03" ]] ; then
+    STA2="stage2_800.bin"
+    elif [[ $FIRMWAREVERSION == "8.50" ]] || [[ $FIRMWAREVERSION == "8.52" ]] ; then
+    STA2="stage2_8.50.bin"
+    elif [[ $FIRMWAREVERSION == "9.00" ]] ; then
+    STA2="stage2_900.bin"
+    elif [[ $FIRMWAREVERSION == "9.03" ]] || [[ $FIRMWAREVERSION == "9.04" ]] ; then
+    STA2="stage2_903.bin"
+    elif [[ $FIRMWAREVERSION == "9.50" ]] || [[ $FIRMWAREVERSION == "9.51" ]] || [[ $FIRMWAREVERSION == "9.60" ]] ; then
+    STA2="stage2_950.bin"
+    elif [[ $FIRMWAREVERSION == "10.00" ]] || [[ $FIRMWAREVERSION == "10.01" ]] ; then
+    STA2="stage2_1000.bin"
+    elif [[ $FIRMWAREVERSION == "10.50" ]] || [[ $FIRMWAREVERSION == "10.70" ]] || [[ $FIRMWAREVERSION == "10.71" ]] ; then
+    STA2="stage2_1050.bin"
+    elif [[ $FIRMWAREVERSION == "11.00" ]] ; then
+    STA2="stage2_1100.bin"
+    fi
 fi
-fi
-PITYP=$(tr -d '\0' </proc/device-tree/model) 
+PITYP=$(tr -d '\0' </proc/device-tree/model)
 if [[ $PITYP == *"Raspberry Pi 2"* ]] ;then
 coproc read -t 15 && wait "$!" || true
 CPPBIN="pppwn7"
@@ -138,11 +126,11 @@ if [[ $LEDACT == "status" ]] || [[ $LEDACT == "off" ]] ;then
       LEDACT="normal"
    fi
 fi
-echo -e "\n\n\033[36m _____  _____  _____                               
-|  __ \\|  __ \\|  __ \\                    _     _   
-| |__) | |__) | |__) |_      ___ __    _| |_ _| |_ 
+echo -e "\n\n\033[36m _____  _____  _____
+|  __ \\|  __ \\|  __ \\                    _     _
+| |__) | |__) | |__) |_      ___ __    _| |_ _| |_
 |  ___/|  ___/|  ___/\\ \\ /\\ / / '_ \\  |_   _|_   _|
-| |    | |    | |     \\ V  V /| | | |   |_|   |_|  
+| |    | |    | |     \\ V  V /| | | |   |_|   |_|
 |_|    |_|    |_|      \\_/\\_/ |_| |_|\033[0m
 \n\033[33mhttps://github.com/TheOfficialFloW/PPPwn\nhttps://github.com/xfangfang/PPPwn_cpp\033[0m\n" | sudo tee /dev/tty1
 sudo systemctl stop pppoe
@@ -153,7 +141,7 @@ if [ $USBETHERNET = true ] ; then
 	echo '1-1' | sudo tee /sys/bus/usb/drivers/usb/bind >/dev/null
 	coproc read -t 4 && wait "$!" || true
 	sudo ip link set $INTERFACE up
-   else	
+   else
 	sudo ip link set $INTERFACE down
 	coproc read -t 5 && wait "$!" || true
 	sudo ip link set $INTERFACE up
@@ -167,7 +155,7 @@ if [ $VMUSB = true ] ; then
   for rdir in "${rdirarr[@]}"; do
     readarray -t pdirarr  < <(sudo ls /media/pwndrives/${rdir})
     for pdir in "${pdirarr[@]}"; do
-       if [[ ${pdir,,}  == "payloads" ]] ; then 
+       if [[ ${pdir,,}  == "payloads" ]] ; then
 	     FOUND=1
 	     UDEV='/dev/'${rdir}
 	     break
@@ -176,7 +164,7 @@ if [ $VMUSB = true ] ; then
       if [ "$FOUND" -ne 0 ]; then
         break
       fi
-  done  
+  done
   if [[ ! -z $UDEV ]] ;then
     sudo modprobe g_mass_storage file=$UDEV stall=0 ro=0 removable=1
   fi
@@ -184,7 +172,7 @@ if [ $VMUSB = true ] ; then
 fi
 if [ $PPPOECONN = true ] ; then
    echo -e "\033[92mInternet Access:\033[93m Enabled\033[0m" | sudo tee /dev/tty1
-else   
+else
    echo -e "\033[92mInternet Access:\033[93m Disabled\033[0m" | sudo tee /dev/tty1
 fi
 if [ -f /boot/firmware/PPPwn/pwn.log ]; then
@@ -202,7 +190,7 @@ if [[ ! $(ifconfig $INTERFACE) == *"RUNNING"* ]]; then
    echo -e "\033[32mLink found\033[0m\n" | sudo tee /dev/tty1
 fi
 if [ $RESTMODE = true ] && [ $UGH = true ] ; then
-sudo pppoe-server -I $INTERFACE -T 60 -N 1 -C PPPWN -S PPPWN -L 192.168.2.1 -R 192.168.2.2 
+sudo pppoe-server -I $INTERFACE -T 60 -N 1 -C PPPWN -S PPPWN -L 192.168.2.1 -R 192.168.2.2
 coproc read -t 2 && wait "$!" || true
 while [[ $(sudo nmap -p 3232 192.168.2.2 | grep '3232/tcp' | cut -f2 -d' ') == "" ]]
 do
@@ -244,7 +232,7 @@ if [ $USBETHERNET = true ] ; then
 	echo '1-1' | sudo tee /sys/bus/usb/drivers/usb/bind >/dev/null
 	coproc read -t 4 && wait "$!" || true
 	sudo ip link set $INTERFACE up
-   else	
+   else
 	sudo ip link set $INTERFACE down
 	coproc read -t 5 && wait "$!" || true
 	sudo ip link set $INTERFACE up
@@ -269,8 +257,8 @@ if [ -f /boot/firmware/PPPwn/config.sh ]; then
    PPDBG=false
  fi
 fi
-while read -r stdo ; 
-do 
+while read -r stdo ;
+do
  if [ $PPDBG = true ] ; then
 	echo -e $stdo | sudo tee /dev/tty1 | sudo tee /dev/pts/* | sudo tee -a /boot/firmware/PPPwn/pwn.log
  fi
@@ -302,7 +290,7 @@ do
  	echo -e "\033[31m\nFailed retrying...\033[0m\n" | sudo tee /dev/tty1
  elif [[ $stdo  == *"Unsupported firmware version"* ]] ; then
  	echo -e "\033[31m\nUnsupported firmware version\033[0m\n" | sudo tee /dev/tty1
-	
+
 	if [[ $LEDACT == "status" ]] ;then
 	 	echo none | sudo tee $ALED >/dev/null
 	 	echo default-on | sudo tee $PLED >/dev/null
@@ -310,7 +298,7 @@ do
  	exit 1
  elif [[ $stdo  == *"Cannot find interface with name of"* ]] ; then
  	echo -e "\033[31m\nInterface $INTERFACE not found\033[0m\n" | sudo tee /dev/tty1
-	
+
 	if [[ $LEDACT == "status" ]] ;then
 	 	echo none | sudo tee $ALED >/dev/null
 	 	echo default-on | sudo tee $PLED >/dev/null
